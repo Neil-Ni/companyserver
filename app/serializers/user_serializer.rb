@@ -2,6 +2,7 @@ class UserSerializer
   def call(user)
     {
       uuid:                 user.id,
+      name:                 user.first_name,
       internal_id:          1,
       company_uuid:         user.company_id,
       email:                user.email,
