@@ -1,0 +1,26 @@
+@import "../../../../../../frontend_resources/scss/colors";
+
+.shift-row-photo-name {
+  padding-left: 35px;
+  padding-top: 25px;
+  display: flex;
+
+  .button-column {
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .name-column {
+    display: inline-block;
+    .row-name {
+      line-height: 1.2;
+      color: $dark-grey;
+      font-weight: 600;
+      font-size: 18px;
+      display: inline-block;
+      margin: 0;
+      margin-right: 10px;
+      margin-top: 5px;
+    }
+  }
+}

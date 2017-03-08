@@ -17,3 +17,7 @@
 .byebug_history
 .idea
 tmp/*
+
+client/node_modules
+client/npm-debug.log
+client/dist
