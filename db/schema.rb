@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20170307224754) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "team_id"
+    t.integer  "company_id"
     t.integer  "user_id"
-    t.index ["team_id"], name: "index_admins_on_team_id", using: :btree
+    t.index ["company_id"], name: "index_admins_on_company_id", using: :btree
     t.index ["user_id"], name: "index_admins_on_user_id", using: :btree
   end
 

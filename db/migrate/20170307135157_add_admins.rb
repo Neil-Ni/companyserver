@@ -4,7 +4,7 @@ class AddAdmins < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
 
-    add_reference :admins, :team, index: true
+    add_reference :admins, :company, index: true
     add_reference :admins, :user, index: true
   end
 end
