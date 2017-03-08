@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20170307224754) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                    default: "",       null: false
-    t.string   "default_timezone",        default: "",       null: false
     t.string   "default_day_week_starts", default: "monday", null: false
     t.boolean  "archived",                default: false,    null: false
     t.datetime "created_at",                                 null: false
