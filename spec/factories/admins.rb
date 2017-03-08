@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :admin do
     user
-    team
+    company
   end
 end

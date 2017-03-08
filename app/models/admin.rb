@@ -1,4 +1,4 @@
 class Admin < ApplicationRecord
-  belongs_to :team
+  belongs_to :company
   belongs_to :user
 end

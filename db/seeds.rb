@@ -9,18 +9,18 @@
 
 
 company = FactoryGirl.create(:company)
-user = FactoryGirl.create(:user, company: company)
+user_1 = FactoryGirl.create(:user, company: company)
 user_2 = FactoryGirl.create(:user, company: company)
 user_3 = FactoryGirl.create(:user, company: company)
 
 team = FactoryGirl.create(:team, company: company)
-FactoryGirl.create(:admin, user: user, team: team)
+FactoryGirl.create(:admin, user: user_1, company: company)
 
 job_1 = FactoryGirl.create(:job, team: team)
 job_2 = FactoryGirl.create(:job, team: team)
 
-worker_1 = FactoryGirl.create(:worker, team: team, user: user)
-worker_2 = FactoryGirl.create(:worker, team: team, user: user)
+worker_1 = FactoryGirl.create(:worker, team: team, user: user_1)
+worker_2 = FactoryGirl.create(:worker, team: team, user: user_2)
 
 shift = FactoryGirl.create(:shift, job: job_1, team: team, user: user_2)
 shift = FactoryGirl.create(:shift, job: job_2, team: team, user: user_3)
