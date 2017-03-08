@@ -16,6 +16,6 @@ class V1::Companies::TeamsController < V1::Companies::BaseController
   end
 
   def team
-    company.teams.find(params[:id])
+    teams.find(params[:id])
   end
 end
