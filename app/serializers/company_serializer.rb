@@ -1,7 +1,7 @@
 class CompanySerializer
   def call(company)
     {
-      uuid:                    company.id,
+      uuid:                    company.id.to_s,
       name:                    company.name,
       archived:                company.archived,
       default_timezone:        'America/New_York',

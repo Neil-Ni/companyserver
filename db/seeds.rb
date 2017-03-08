@@ -21,6 +21,7 @@ job_2 = FactoryGirl.create(:job, team: team)
 
 worker_1 = FactoryGirl.create(:worker, team: team, user: user_1)
 worker_2 = FactoryGirl.create(:worker, team: team, user: user_2)
+worker_3 = FactoryGirl.create(:worker, team: team, user: user_3)
 
 shift = FactoryGirl.create(:shift, job: job_1, team: team, user: user_2)
 shift = FactoryGirl.create(:shift, job: job_2, team: team, user: user_3)

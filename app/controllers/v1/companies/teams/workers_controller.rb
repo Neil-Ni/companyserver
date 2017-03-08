@@ -1,8 +1,8 @@
 class V1::Companies::Teams::WorkersController < V1::Companies::Teams::BaseController
   def index
     render json: {
-      company_uuid: company.id,
-      team_uuid:    team.id,
+      company_uuid: company.id.to_s,
+      team_uuid:    team.id.to_s,
       workers:      workers.map { |t| UserSerializer.new.(t) }
     }
   end

@@ -8,7 +8,7 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
   end
 
   def show
-    render json: UserSerializer.new.(team)
+    render json: UserSerializer.new.(user)
   end
 
   private

@@ -1,11 +1,11 @@
 class ShiftSerializer
   def call(shift)
     {
-      uuid:         shift.id,
-      company_uuid: shift.team.company_id,
-      team_uuid:    shift.team_id,
-      job_uuid:     shift.job_id,
-      user_uuid:    shift.user_id,
+      uuid:         shift.id.to_s,
+      company_uuid: shift.team.company_id.to_s,
+      team_uuid:    shift.team_id.to_s,
+      job_uuid:     shift.job_id.to_s,
+      user_uuid:    shift.user_id.to_s,
       start:        shift.start,
       stop:         shift.stop,
       published:    shift.published
