@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170307224754) do
   create_table "jobs", force: :cascade do |t|
     t.string   "name",       default: "",       null: false
     t.string   "color",      default: "48B7AB", null: false
+    t.boolean  "archived",   default: false,    null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "team_id"
@@ -94,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170307224754) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.string   "phone_number"
+    t.string   "phonenumber"
     t.boolean  "admin",                  default: false, null: false
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -106,6 +107,10 @@ ActiveRecord::Schema.define(version: 20170307224754) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "company_id"

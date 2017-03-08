@@ -3,6 +3,7 @@ class AddJobs < ActiveRecord::Migration[5.0]
     create_table :jobs do |t|
       t.string :name, null: false, default: ''
       t.string :color, null: false, default: '48B7AB'
+      t.boolean :archived, null: false, default: false
 
       t.timestamps null: false
     end
