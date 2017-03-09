@@ -25,7 +25,7 @@
   "unassigned": "未定",
   "viewByEmployee": "照員工顯示",
   "viewByJob": "照班名顯示",
-  "unassignedShifts": "未分配班",
+  "unassignedShifts": "未分配",
   "noJobs": "臨時班",
   "stillUnassigned": "臨時班",
   "delete": "刪除",
@@ -35,6 +35,13 @@
   "noTimeAssigned": "未分配",
   "shiftStart": "開始時間",
   "shiftEnd": "結束時間",
+  "selectAtLeastOneTeam": "至少選一個單位",
+  "required": "必填",
+  "confirmation": "警告",
+  "confirmed": "確定",
+  "msg": {
+    "jobs_deleted": "所有的班會一並刪除. 確定要繼續?"
+  },
   "navLinks": {
     "settings": "班名設定",
     "scheduler": "班表",

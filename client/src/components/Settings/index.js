@@ -285,9 +285,8 @@ class Settings extends React.Component {
         </div>
         <ConfirmationModal
           ref={(modal) => { this.modal = modal; }}
-          title="Confirmation"
-          content={'Shifts with this job will remain unchanged. Are you '
-                  + 'sure you want to archive this job?'}
+          title={t('confirmation')}
+          content={t('msg.jobs_deleted')}
           buttons={[
             <StaffjoyButton
               buttonType="outline"
@@ -295,7 +294,7 @@ class Settings extends React.Component {
               key="cancel-button"
               onClick={this.handleCancelModalClick}
             >
-              Cancel
+              {t('cancel')}
             </StaffjoyButton>,
             <StaffjoyButton
               buttonType="outline"
@@ -304,7 +303,7 @@ class Settings extends React.Component {
               style={{ float: 'right' }}
               onClick={this.handleDeleteJobClick}
             >
-              Yes
+              {t('confirmed')}
             </StaffjoyButton>,
           ]}
         />

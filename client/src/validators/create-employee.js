@@ -6,7 +6,7 @@ export default function createEmployee(values) {
 
   required.forEach((fieldName) => {
     if (!values[fieldName]) {
-      errors[fieldName] = 'Required';
+      errors[fieldName] = 'required';
     }
   });
 
@@ -17,7 +17,7 @@ export default function createEmployee(values) {
     );
 
     if (!hasATeam) {
-      errors.teams = 'Select at least one team';
+      errors.teams = 'selectAtLeastOneTeam';
     }
   }
 

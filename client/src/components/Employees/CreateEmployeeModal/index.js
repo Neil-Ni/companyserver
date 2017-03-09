@@ -18,11 +18,11 @@ require('./create-employee-modal.scss');
 const EMPTY_OBJECT = Object.freeze({});
 
 // Adapter for redux-form. Add your prop - do not use spread operator.
-function TextField({ disabled, input, label, meta, name, width }) {
+function TextField({ disabled, input, label, meta, name, width, t }) {
   return (
     <StaffjoyTextField
       disabled={disabled}
-      error={meta.error}
+      error={t(meta.error)}
       label={label}
       name={name}
       width={width}
@@ -39,6 +39,7 @@ TextField.propTypes = {
   meta: PropTypes.object,
   name: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  t: PropTypes.func.isRequired,
 };
 
 // Adapter for redux-form.
@@ -51,11 +52,12 @@ function SelectableList({
   records,
   selectedUuid,
   uuidKey,
+  t,
 }) {
   return (
     <SelectableModalList
       displayByProperty={displayByProperty}
-      error={meta.error}
+      error={t(meta.error)}
       formCallback={({ teams }) => {
         // Adapt shape of argument to expected shape for redux-form.
         input.onChange({ ...teams });
@@ -78,6 +80,7 @@ SelectableList.propTypes = {
   records: PropTypes.array,
   selectedUuid: PropTypes.string,
   uuidKey: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
 
 class CreateEmployeeModal extends React.Component {
@@ -126,7 +129,7 @@ class CreateEmployeeModal extends React.Component {
 
     const panelContent = (
       <Field
-        component={SelectableList}
+        component={translate('common')(SelectableList)}
         displayByProperty="name"
         formField="teams"
         name="teams"
@@ -165,21 +168,21 @@ class CreateEmployeeModal extends React.Component {
     const content = (
       <form className="create-employee-modal-content">
         <Field
-          component={TextField}
+          component={translate('common')(TextField)}
           disabled={submitting}
           label={t('fullName')}
           name="full_name"
           width="full"
         />
         <Field
-          component={TextField}
+          component={translate('common')(TextField)}
           disabled={submitting}
           label={t('email')}
           name="email"
           width="full"
         />
         <Field
-          component={TextField}
+          component={translate('common')(TextField)}
           disabled={submitting}
           label={t('phone')}
           name="phonenumber"

@@ -35,6 +35,13 @@
   "noTimeAssigned": "no hours",
   "shiftStart": "Shift Start",
   "shiftEnd": "Shift End",
+  "selectAtLeastOneTeam": "Select at least one team",
+  "required": "Required",
+  "confirmation": "Confirmation",
+  "confirmed": "Yes",
+  "msg": {
+    "jobs_deleted": "Shifts with this job will remain unchanged. Are you sure you want to archive this job?"
+  },
   "navLinks": {
     "settings": "Settings",
     "scheduler": "Scheduler",

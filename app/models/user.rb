@@ -11,4 +11,12 @@ class User < ApplicationRecord
 
   has_many :working_teams, through: :workers, source: :team
   has_many :admin_companies, through: :admins, source: :company
+
+  def email_required?
+    false
+  end
+
+  def password_required?
+    false
+  end
 end

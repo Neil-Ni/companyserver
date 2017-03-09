@@ -1,4 +1,8 @@
 class V1::Companies::DirectoryController < V1::Companies::BaseController
+  before_action :pre_process_params, only: [:create]
+
+  wrap_parameters User
+
   def index
     render json: {
       accounts: company.users.map { |t| UserSerializer.new.(t) },
@@ -11,6 +15,12 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
     render json: UserSerializer.new.(user)
   end
 
+  def create
+    user = users.create!(create_params.merge(last_name: ''))
+
+    render json: UserSerializer.new.(user)
+  end
+
   private
 
   def users
@@ -19,5 +29,17 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
 
   def user
     users.find(params[:id])
+  end
+
+  def pre_process_params
+    params[:user].tap do |s|
+      s[:first_name]  = params[:name] if params.key?(:name)
+      s[:email]       = params[:email] if params.key?(:email)
+      s[:phonenumber] = params[:phonenumber] if params.key?(:phonenumber)
+    end
+  end
+
+  def create_params
+    params.require(:user).permit(:first_name, :email, :phonenumber).to_h
   end
 end

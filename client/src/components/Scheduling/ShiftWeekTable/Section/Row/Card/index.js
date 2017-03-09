@@ -12,7 +12,6 @@ import TimeSelector from 'components/TimeSelector';
 import { ModalLayoutSingleColumn } from 'components/ModalLayout';
 import {
   MOMENT_SHIFT_CARD_TIMES,
-  UNASSIGNED_SHIFT_NAME,
   NO_TRANSPARENCY,
 } from 'constants/config';
 import {
@@ -223,7 +222,7 @@ class ShiftWeekTableCard extends React.Component {
       const photoUrl = (userUuid !== '') ?
         employees[userUuid].photo_url : unassignedShiftPhoto;
       const userName = (userUuid !== '') ?
-        employees[userUuid].name : UNASSIGNED_SHIFT_NAME;
+        employees[userUuid].name : t('unassignedShifts');
       zAxisElement = (
         <SchedulingTablePhotoName
           name={userName}

@@ -59,8 +59,6 @@ export const SCHEDULING_VIEW_BY_OPTIONS = [
   },
 ];
 
-export const UNASSIGNED_SHIFT_NAME = 'Unassigned Shift';
-
 export const DAY_NAME_LETTER_MAP = {
   monday: 'M',
   tuesday: 'T',
