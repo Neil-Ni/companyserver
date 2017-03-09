@@ -170,7 +170,7 @@ export function updateTeamJob(
     return fetch(
       routeToMicroservice('company', jobPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
         body: JSON.stringify(updateData),
       })
@@ -233,7 +233,7 @@ export function createTeamJob(companyUuid, teamUuid, jobPayload) {
     return fetch(
       routeToMicroservice('company', jobPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(jobPayload),
       })

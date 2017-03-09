@@ -236,7 +236,7 @@ export function createEmployee(companyUuid, employeeData, callback) {
     return fetch(
       routeToMicroservice('company', directoryPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(employeeData),
       })
@@ -267,7 +267,7 @@ export function updateEmployee(companyUuid, employeeUuid, newData, callback) {
     return fetch(
       routeToMicroservice('company', directoryPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
         body: JSON.stringify(updateData),
       })

@@ -186,7 +186,7 @@ export function createTeamShift(companyUuid, teamUuid, shiftPayload) {
     return fetch(
       routeToMicroservice('company', shiftPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(shiftPayload),
       })
@@ -238,7 +238,7 @@ export function bulkUpdateTeamShifts(companyUuid, teamUuid, putBody) {
       {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
-        body: new FormData(JSON.stringify(putBody)),
+        body: JSON.stringify(putBody),
       })
       .then(checkStatus)
       .then(parseJSON)

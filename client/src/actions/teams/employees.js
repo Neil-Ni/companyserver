@@ -134,7 +134,7 @@ export function createTeamEmployee(companyUuid, teamUuid, userUuid) {
 
     return fetch(
       routeToMicroservice('company', workerPath), {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify({ user_uuid: userUuid }),
       })

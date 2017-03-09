@@ -1,28 +1,29 @@
 class V1::Companies::Teams::ShiftsController < V1::Companies::Teams::BaseController
-  wrap_parameters :shift, include: [
-    :company_uuid,
-    :job_uuid,
-    :published,
-    :start,
-    :stop,
-    :team_uuid,
-    :user_uuid,
-    :uuid
-  ]
+  before_action :pre_process_params, only: [:update, :create]
+
+  wrap_parameters Shift
 
   def index
-    render json: {
-      shifts: shifts.map { |t| ShiftSerializer.new.(t) }
-    }
+    render json: { shifts: shifts.map { |t| ShiftSerializer.new.(t) } }
   end
 
   def show
     render json: ShiftSerializer.new.(shift)
   end
 
+  def create
+    shift = shifts.create!(create_params)
+    render json: ShiftSerializer.new.(shift)
+  end
+
   def update
     shift.update!(update_params)
     render json: ShiftSerializer.new.(shift)
+  end
+
+  def destroy
+    shift.destroy!
+    render json: {}
   end
 
   private
@@ -39,23 +40,30 @@ class V1::Companies::Teams::ShiftsController < V1::Companies::Teams::BaseControl
     params[:id]
   end
 
-  def update_params
-    _params = params.require(:shift).permit(
-      :company_uuid,
-      :job_uuid,
+  def pre_process_params
+    params[:shift].tap do |s|
+      s[:user_id] = params[:user_uuid] if params.key?(:user_uuid)
+      s[:job_id]  = params[:job_uuid] if params.key?(:job_uuid)
+    end
+  end
+
+  def create_params
+    params.require(:shift).permit(
       :published,
       :start,
       :stop,
-      :team_uuid,
-      :user_uuid,
-      :uuid
-    )
+      :user_id,
+      :job_id
+    ).to_h
+  end
 
-    _params.
-      slice(:published, :start, :stop).
-      merge(
-        job_id: _params[:job_uuid],
-        user_id: _params[:user_uuid]
-      )
+  def update_params
+    params.require(:shift).permit(
+      :job_id,
+      :published,
+      :start,
+      :stop,
+      :user_id
+    ).to_h
   end
 end
