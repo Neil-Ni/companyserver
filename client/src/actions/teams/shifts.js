@@ -213,9 +213,9 @@ export function updateTeamShift(companyUuid, teamUuid, shiftUuid, newData) {
     return fetch(
       routeToMicroservice('company', shiftPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
-        body: JSON.stringify(updateData),
+        body: JSON.stringify(newData),
       })
       .then(checkStatus)
       .then(parseJSON)
@@ -236,9 +236,9 @@ export function bulkUpdateTeamShifts(companyUuid, teamUuid, putBody) {
     return fetch(
       routeToMicroservice('company', shiftPath),
       {
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
-        body: JSON.stringify(putBody),
+        body: new FormData(JSON.stringify(putBody)),
       })
       .then(checkStatus)
       .then(parseJSON)

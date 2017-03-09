@@ -19,6 +19,7 @@
     "window": true,
     "fetch": true,
     "confirm": true,
+    "FormData": true,
   },
   "settings": {
     "import/resolver": {

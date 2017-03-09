@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
       resources :teams, module: :teams do
         resources :jobs, only: [:index, :show]
-        resources :shifts, only: [:index, :show]
+        resources :shifts, only: [:index, :show, :update]
         resources :workers, only: [:index, :show]
       end
     end
