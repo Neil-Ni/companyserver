@@ -96,10 +96,12 @@ class CreateShiftModal extends React.Component {
                          noEmployeesSelected ||
                          noDaysSelected;
 
-    employeesArray.unshift({
-      user_uuid: '',
-      name: t('unassigned'),
-    });
+    if (viewBy === 'job') {
+      employeesArray.unshift({
+        user_uuid: '',
+        name: t('unassigned'),
+      });
+    }
 
     if (selectedUuid === UNASSIGNED_SHIFTS) {
       selectedUuid = '';
