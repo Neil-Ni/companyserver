@@ -1,24 +1,30 @@
-# README
+# Staffjoy on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Goal
 
-* Ruby version
+Over the weekend, I tried to run the original code for [Staffjoy](https://github.com/Neil-Ni/v2) locally, but it was taking too long to run vagrant and too heavy to iterate with modifications. This repo is an attempt to simplify the original code into rails api.
 
-* System dependencies
 
-* Configuration
+###To run with json server:
 
-* Database creation
+```
+cd client && npm instal
 
-* Database initialization
+cd json-server && sh start.sh
 
-* How to run the test suite
+npm start
 
-* Services (job queues, cache servers, search engines, etc.)
+```
 
-* Deployment instructions
 
-* ...
+###To run with rails:
+
+```
+
+# make sure postgres is runnning and modify your config in config/database.yml
+bundle install && rails db:create && rails db:reset
+cd client && npm install && npm start
+
+
+```
