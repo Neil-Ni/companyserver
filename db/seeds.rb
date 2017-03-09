@@ -13,7 +13,7 @@ user_1 = FactoryGirl.create(:user, company: company)
 user_2 = FactoryGirl.create(:user, company: company)
 user_3 = FactoryGirl.create(:user, company: company)
 
-team = FactoryGirl.create(:team, company: company)
+team = FactoryGirl.create(:team, company: company, timezone: 'America/New_York')
 FactoryGirl.create(:admin, user: user_1, company: company)
 
 job_1 = FactoryGirl.create(:job, team: team)

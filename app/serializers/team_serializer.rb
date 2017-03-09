@@ -6,7 +6,8 @@ class TeamSerializer
       name:            team.name,
       archived:        team.archived,
       day_week_starts: team.day_week_starts,
-      color:           team.color
+      color:           team.color,
+      timezone:        team.timezone
     }
   end
 end
