@@ -22,6 +22,7 @@ class Employees extends React.Component {
 
   render() {
     const {
+      children,
       companyUuid,
       employees,
       isFetching,
@@ -99,6 +100,9 @@ class Employees extends React.Component {
             />
           </div>
         </div>
+        <div className="employees-sidebar">
+          {children}
+        </div>
       </div>
     );
   }
@@ -112,6 +116,7 @@ Employees.propTypes = {
   // filters: PropTypes.object.isRequired,
   updateSearchFilter: PropTypes.func.isRequired,
   teams: PropTypes.array.isRequired,
+  children: PropTypes.element,
   tableRowClicked: PropTypes.func.isRequired,
 };
 
