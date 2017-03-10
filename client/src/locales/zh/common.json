@@ -40,7 +40,8 @@
   "confirmation": "警告",
   "confirmed": "確定",
   "msg": {
-    "jobs_deleted": "所有的班會一並刪除. 確定要繼續?"
+    "jobs_deleted": "所有的班會一並刪除. 確定要繼續?",
+    "cannot_deleted_yourself": "不難刪除自己"
   },
   "navLinks": {
     "settings": "班名設定",
@@ -69,5 +70,6 @@
     "msg": "按下右上角的按鈕 <新增員工>. 點選任何一個員工做修改. 接下來點選左邊的 <班名設定> 增加固定班. 最後到 <班表> 完成排班.",
     "title": "公司員工"
   },
-  "contactInformation": "聯絡方法"
+  "contactInformation": "聯絡方法",
+  "warning": "警告"
 }

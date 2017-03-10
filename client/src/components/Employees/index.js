@@ -31,13 +31,27 @@ class Employees extends React.Component {
   }
 
   handleShowModalClick(uuid) {
+    const { userUuid } = this.props;
+
     this.employeeUuidToDelete = uuid;
-    this.modal.showModal();
+
+    if (userUuid === uuid) {
+      this.errorModel.showModal();
+    } else {
+      this.modal.showModal();
+    }
   }
 
   handleCancelModalClick() {
+    const { userUuid } = this.props;
+
+    if (userUuid === this.employeeUuidToDelete) {
+      this.errorModel.hideModal();
+    } else {
+      this.modal.hideModal();
+    }
+
     this.employeeUuidToDelete = null;
-    this.modal.hideModal();
   }
 
   handleDeleteEmployeeClick() {
@@ -162,6 +176,21 @@ class Employees extends React.Component {
               </StaffjoyButton>,
             ]}
           />
+          <ConfirmationModal
+            ref={(modal) => { this.errorModel = modal; }}
+            title={t('warning')}
+            content={t('msg.cannot_deleted_yourself')}
+            buttons={[
+              <StaffjoyButton
+                buttonType="outline"
+                size="tiny"
+                key="yes-button"
+                onClick={this.handleCancelModalClick}
+              >
+                {t('confirmed')}
+              </StaffjoyButton>,
+            ]}
+          />
         </div>
         <div className="employees-sidebar">
           {children}
@@ -183,6 +212,7 @@ Employees.propTypes = {
   tableRowClicked: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   deleteEmployee: PropTypes.func.isRequired,
+  userUuid: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -203,6 +233,7 @@ function mapStateToProps(state, ownProps) {
     // filters: state.employees.filters,
     employees,
     teams: _.values(state.teams.data),
+    userUuid: state.whoami.data.user_uuid,
   };
 }
 

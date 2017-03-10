@@ -40,7 +40,8 @@
   "confirmation": "Confirmation",
   "confirmed": "Yes",
   "msg": {
-    "jobs_deleted": "Shifts with this job will remain unchanged. Are you sure you want to archive this job?"
+    "jobs_deleted": "Shifts with this job will remain unchanged. Are you sure you want to archive this job?",
+    "cannot_deleted_yourself": "Cannot delete yourself"
   },
   "navLinks": {
     "settings": "Settings",
@@ -69,5 +70,6 @@
     "msg": "Manage your team, all in one place. Assign your employees to teams, and set up their preferred method of contact",
     "title": "Staffjoy Employees"
   },
-  "contactInformation": "Contact Information"
+  "contactInformation": "Contact Information",
+  "warning": "Warning"
 }

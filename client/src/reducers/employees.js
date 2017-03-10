@@ -42,7 +42,7 @@ export default function (state = initialState, action) {
     case actionTypes.DELETE_EMPLOYEE:
       return _.extend({}, state, {
         didInvalidate: false,
-        completeSet: false
+        completeSet: false,
       });
 
     case actionTypes.RECEIVE_EMPLOYEES:
