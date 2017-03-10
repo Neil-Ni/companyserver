@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { PropTypes } from 'react';
-
+import DeleteIcon from 'components/SVGs/DeleteIcon';
 import * as rowTypes from './rowTypes';
 import TableContactInfo from './ContactInfo';
 import TablePhotoName from './PhotoName';
@@ -85,7 +85,7 @@ class TableRow extends React.Component {
 
 
   render() {
-    const { columns } = this.props;
+    const { columns, handleShowModalClick, rowId } = this.props;
 
     return (
       <tr onClick={this.onRowClick}>
@@ -94,6 +94,14 @@ class TableRow extends React.Component {
             this.getRowComponent(column)
           )
         }
+        <td className="mdl-data-table__cell--non-numeric job-delete-cell">
+          <DeleteIcon
+            fill="#666666"
+            width="25"
+            height="25"
+            onClick={() => { handleShowModalClick(rowId); }}
+          />
+        </td>
       </tr>
     );
   }
@@ -104,6 +112,7 @@ TableRow.propTypes = {
   rowData: PropTypes.object.isRequired,
   rowId: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  handleShowModalClick: PropTypes.func.isRequired,
 };
 
 export default TableRow;

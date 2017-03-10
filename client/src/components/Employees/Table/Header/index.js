@@ -23,6 +23,7 @@ function TableHeader({ columns, t }) {
               </th>);
           })
         }
+        <th className="mdl-data-table__cell--non-numeric col-1" />
       </tr>
     </thead>
   );

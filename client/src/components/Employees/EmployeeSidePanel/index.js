@@ -64,7 +64,7 @@ class EmployeeSidePanel extends React.Component {
               <Field
                 component={EmployeeFormField}
                 iconKey="phone"
-                name={t('phonenumber')}
+                name={t('phone')}
                 updateStatus={updatingFields && updatingFields.phonenumber}
                 onBlur={this.handleFieldBlur}
               />

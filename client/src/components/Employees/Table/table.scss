@@ -12,6 +12,14 @@
     max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &:hover svg {
+      visibility: visible;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .col-1 { width: 8.3%; }

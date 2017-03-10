@@ -2,9 +2,12 @@ import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
+import { translate } from 'react-i18next';
 import * as actions from 'actions';
 import LoadingScreen from 'components/LoadingScreen';
 import SearchField from 'components/SearchField';
+import ConfirmationModal from 'components/ConfirmationModal';
+import StaffjoyButton from 'components/StaffjoyButton';
 import { COMPANY_EMPLOYEE, getRoute } from 'constants/paths';
 import CreateEmployeeModal from './CreateEmployeeModal';
 import Table from './Table';
@@ -13,11 +16,45 @@ import * as rowTypes from './Table/Row/rowTypes';
 require('./employees.scss');
 
 class Employees extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleShowModalClick = this.handleShowModalClick.bind(this);
+    this.handleCancelModalClick = this.handleCancelModalClick.bind(this);
+    this.handleDeleteEmployeeClick = this.handleDeleteEmployeeClick.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
 
     // get the employees for the whole company
     dispatch(actions.initializeEmployees(this.props.companyUuid));
+  }
+
+  handleShowModalClick(uuid) {
+    this.employeeUuidToDelete = uuid;
+    this.modal.showModal();
+  }
+
+  handleCancelModalClick() {
+    this.employeeUuidToDelete = null;
+    this.modal.hideModal();
+  }
+
+  handleDeleteEmployeeClick() {
+    const {
+      employeeUuidToDelete,
+    } = this;
+
+    this.modal.hideModal();
+
+    // updateTeamJob(
+    //   companyUuid,
+    //   teamUuid,
+    //   jobUuidToDelete,
+    //   { archived: true },
+    // );
+
+    this.employeeUuidToDelete = null;
   }
 
   render() {
@@ -29,6 +66,7 @@ class Employees extends React.Component {
       updateSearchFilter,
       teams,
       tableRowClicked,
+      t,
     } = this.props;
 
     const columns = [
@@ -97,8 +135,33 @@ class Employees extends React.Component {
               rows={employees}
               onRowClick={tableRowClicked}
               uuidKeyName="user_uuid"
+              handleShowModalClick={this.handleShowModalClick}
             />
           </div>
+          <ConfirmationModal
+            ref={(modal) => { this.modal = modal; }}
+            title={t('confirmation')}
+            content={t('msg.jobs_deleted')}
+            buttons={[
+              <StaffjoyButton
+                buttonType="outline"
+                size="tiny"
+                key="cancel-button"
+                onClick={this.handleCancelModalClick}
+              >
+                {t('cancel')}
+              </StaffjoyButton>,
+              <StaffjoyButton
+                buttonType="outline"
+                size="tiny"
+                key="yes-button"
+                style={{ float: 'right' }}
+                onClick={this.handleDeleteEmployeeClick}
+              >
+                {t('confirmed')}
+              </StaffjoyButton>,
+            ]}
+          />
         </div>
         <div className="employees-sidebar">
           {children}
@@ -118,6 +181,7 @@ Employees.propTypes = {
   teams: PropTypes.array.isRequired,
   children: PropTypes.element,
   tableRowClicked: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -127,7 +191,7 @@ function mapStateToProps(state, ownProps) {
 
   _.each(state.employees.data, (employee) => {
     if (employee.name.toLowerCase().includes(searchQuery) ||
-        employee.email.includes(searchQuery)) {
+      employee.email.includes(searchQuery)) {
       employees.push(employee);
     }
   });
@@ -156,4 +220,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   dispatch,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Employees);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(translate('common')(Employees));
