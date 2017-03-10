@@ -64,7 +64,7 @@ class EmployeeSidePanel extends React.Component {
               <Field
                 component={EmployeeFormField}
                 iconKey="phone"
-                name={t('phone')}
+                name="phone_number"
                 updateStatus={updatingFields && updatingFields.phonenumber}
                 onBlur={this.handleFieldBlur}
               />
@@ -73,7 +73,7 @@ class EmployeeSidePanel extends React.Component {
               <Field
                 component={EmployeeFormField}
                 iconKey="mail_outline"
-                name={t('email')}
+                name="email"
                 updateStatus={updatingFields && updatingFields.email}
                 onBlur={this.handleFieldBlur}
               />

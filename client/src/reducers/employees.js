@@ -12,6 +12,18 @@ const initialState = {
   updatingFields: {},
 };
 
+function removeNestedModel(state, nestedProperty, modelUuid) {
+  const newState = _.extend({}, state);
+
+  let nestedCollection = _.get(newState, 'data', {});
+
+  nestedCollection = _.omit(_.extend({}, nestedCollection), modelUuid);
+
+  newState.data = nestedCollection;
+
+  return newState;
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.INVALIDATE_EMPLOYEES:
@@ -25,6 +37,12 @@ export default function (state = initialState, action) {
         didInvalidate: false,
         completeSet: false,
         isFetching: true,
+      });
+
+    case actionTypes.DELETE_EMPLOYEE:
+      return _.extend({}, state, {
+        didInvalidate: false,
+        completeSet: false
       });
 
     case actionTypes.RECEIVE_EMPLOYEES:
@@ -72,6 +90,16 @@ export default function (state = initialState, action) {
       return _.extend({}, state, {
         data: _.extend({}, state.data, action.data),
       });
+
+    case actionTypes.DELETING_EMPLOYEE:
+      return state;
+
+    case actionTypes.DELETED_EMPLOYEE:
+      return removeNestedModel(
+        state,
+        'employees',
+        action.userUuid
+      );
 
     default:
       return state;

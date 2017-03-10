@@ -17,11 +17,6 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
 
   def create
     user = users.create!(create_params.merge(last_name: ''))
-
-    company.teams.each do |team|
-      team.workers.create!(user: user)
-    end
-
     render json: UserSerializer.new.(user)
   end
 
@@ -29,6 +24,11 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
     user.update!(update_params)
 
     render json: UserSerializer.new.(user)
+  end
+
+  def destroy
+    user.destroy!
+    render json: {}
   end
 
   private

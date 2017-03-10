@@ -42,17 +42,17 @@ class Employees extends React.Component {
 
   handleDeleteEmployeeClick() {
     const {
+      companyUuid,
+      deleteEmployee,
+    } = this.props;
+
+    const {
       employeeUuidToDelete,
     } = this;
 
     this.modal.hideModal();
 
-    // updateTeamJob(
-    //   companyUuid,
-    //   teamUuid,
-    //   jobUuidToDelete,
-    //   { archived: true },
-    // );
+    deleteEmployee(companyUuid, employeeUuidToDelete);
 
     this.employeeUuidToDelete = null;
   }
@@ -182,6 +182,7 @@ Employees.propTypes = {
   children: PropTypes.element,
   tableRowClicked: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  deleteEmployee: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -213,6 +214,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         employeeUuid,
       })
     );
+  },
+  deleteEmployee: (companyUuid, userUuid) => {
+    dispatch(actions.deleteEmployee(companyUuid, userUuid));
   },
   updateSearchFilter: (event) => {
     dispatch(actions.updateEmployeesSearchFilter(event.target.value));

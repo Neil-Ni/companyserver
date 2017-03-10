@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 
     resources :companies, module: :companies do
       resources :associations, only: [:index]
-      resources :directory, only: [:index, :show, :create, :update]
+      resources :directory, only: [:index, :show, :create, :update, :destroy]
       resources :teams, only: [:index, :show]
 
       resources :teams, module: :teams do
         resources :jobs, only: [:index, :show, :update, :create]
         resources :shifts, only: [:index, :show, :update, :create, :destroy]
-        resources :workers, only: [:index, :show]
+        resources :workers, only: [:index, :show, :create]
       end
     end
   end

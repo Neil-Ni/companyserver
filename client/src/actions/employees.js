@@ -90,6 +90,41 @@ function updatedEmployee(data) {
   };
 }
 
+function deletingEmployee(userUuid) {
+  return {
+    type: actionTypes.DELETING_EMPLOYEE,
+    userUuid,
+  };
+}
+
+function deletedEmployee(userUuid) {
+  return {
+    type: actionTypes.DELETED_EMPLOYEE,
+    userUuid,
+  };
+}
+
+export function deleteEmployee(companyUuid, userUuid) {
+  return (dispatch) => {
+    dispatch(deletingEmployee(userUuid));
+
+    const directoryPath =
+      `/v1/companies/${companyUuid}/directory/${userUuid}`;
+
+    return fetch(
+      routeToMicroservice('company', directoryPath),
+      {
+        credentials: 'include',
+        method: 'DELETE',
+      })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(() =>
+        dispatch(deletedEmployee(userUuid))
+      );
+  };
+}
+
 function fetchEmployees(companyUuid) {
   return (dispatch) => {
     // dispatch action to start the fetch
