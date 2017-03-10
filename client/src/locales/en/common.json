@@ -64,5 +64,10 @@
     "fri": "Fri",
     "sat": "Sat",
     "sun": "Sun"
-  }
+  },
+  "infoPanel": {
+    "msg": "Manage your team, all in one place. Assign your employees to teams, and set up their preferred method of contact",
+    "title": "Staffjoy Employees"
+  },
+  "contactInformation": "Contact Information"
 }

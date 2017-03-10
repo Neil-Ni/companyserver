@@ -1,5 +1,5 @@
 class V1::Companies::DirectoryController < V1::Companies::BaseController
-  before_action :pre_process_params, only: [:create]
+  before_action :pre_process_params, only: [:create, :update]
 
   wrap_parameters User
 
@@ -25,6 +25,12 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
     render json: UserSerializer.new.(user)
   end
 
+  def update
+    user.update!(update_params)
+
+    render json: UserSerializer.new.(user)
+  end
+
   private
 
   def users
@@ -44,6 +50,10 @@ class V1::Companies::DirectoryController < V1::Companies::BaseController
   end
 
   def create_params
+    params.require(:user).permit(:first_name, :email, :phonenumber).to_h
+  end
+
+  def update_params
     params.require(:user).permit(:first_name, :email, :phonenumber).to_h
   end
 end

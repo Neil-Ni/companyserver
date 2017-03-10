@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { translate } from 'react-i18next';
 
 require('./info-side-panel.scss');
 
-function InfoSidePanel() {
-  /* eslint-disable */
-  const body = 'Manage your team, all in one place. Assign your employees to teams, and set up their preferred method of contact.';
-  /* eslint-enable */
-
+function InfoSidePanel({ t }) {
   return (
     <div className="employee-side-panel">
-      <h3>Staffjoy Employees</h3>
-      <p>{body}</p>
+      <h3>{ t('infoPanel.title') }</h3>
+      <p>{ t('infoPanel.msg') }</p>
     </div>
   );
 }
 
-export default InfoSidePanel;
+InfoSidePanel.propTypes = {
+  t: PropTypes.func.isRequired,
+};
+
+export default translate('common')(InfoSidePanel);

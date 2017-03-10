@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :workers
   has_many :admins
 
+  has_many :shifts, dependent: :destroy
   has_many :working_teams, through: :workers, source: :team
   has_many :admin_companies, through: :admins, source: :company
 

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     resources :companies, module: :companies do
       resources :associations, only: [:index]
-      resources :directory, only: [:index, :show, :create]
+      resources :directory, only: [:index, :show, :create, :update]
       resources :teams, only: [:index, :show]
 
       resources :teams, module: :teams do

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { translate } from 'react-i18next';
 import * as actions from 'actions';
 import EmployeePanelPhotoName from './PhotoName';
 import EmployeeFormField from './FormField';
@@ -48,7 +49,7 @@ class EmployeeSidePanel extends React.Component {
   }
 
   render() {
-    const { employee, updatingFields } = this.props;
+    const { employee, updatingFields, t } = this.props;
 
     return (
       <div className="employee-side-panel">
@@ -58,12 +59,12 @@ class EmployeeSidePanel extends React.Component {
             photoUrl={employee.photo_url}
           />
           <div className="info-section" id="contact-information">
-            <h4 className="info-section-title">Contact Information</h4>
+            <h4 className="info-section-title">{t('contactInformation')}</h4>
             <div>
               <Field
                 component={EmployeeFormField}
                 iconKey="phone"
-                name="phonenumber"
+                name={t('phonenumber')}
                 updateStatus={updatingFields && updatingFields.phonenumber}
                 onBlur={this.handleFieldBlur}
               />
@@ -72,22 +73,11 @@ class EmployeeSidePanel extends React.Component {
               <Field
                 component={EmployeeFormField}
                 iconKey="mail_outline"
-                name="email"
+                name={t('email')}
                 updateStatus={updatingFields && updatingFields.email}
                 onBlur={this.handleFieldBlur}
               />
             </div>
-          </div>
-          <div className="info-section" id="work-information">
-            <h4 className="info-section-title">Work Information</h4>
-            <p>teams</p>
-            <p>jobs</p>
-            <p>status</p>
-          </div>
-          <div className="info-section" id="other-information">
-            <h4 className="info-section-title">Other Information</h4>
-            <p>note</p>
-            <p>wage</p>
           </div>
         </form>
       </div>
@@ -102,6 +92,7 @@ EmployeeSidePanel.propTypes = {
   employee: PropTypes.object.isRequired,
   updateEmployeeField: PropTypes.func.isRequired,
   updatingFields: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -131,6 +122,6 @@ const mapDispatchToProps = dispatch => ({
 const Form = reduxForm({
   enableReinitialize: true,
   form: 'employee-side-panel',
-})(EmployeeSidePanel);
+})(translate('common')(EmployeeSidePanel));
 const Container = connect(mapStateToProps, mapDispatchToProps)(Form);
 export default Container;
