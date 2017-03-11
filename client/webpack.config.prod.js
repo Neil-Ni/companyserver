@@ -2,11 +2,13 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
 var hash = Date.now();
 var bundleName = "bundle-" + hash + ".js";
 
 // for cleaning up old files upon building
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+var webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -100,6 +102,19 @@ module.exports = {
     }),
     new WebpackCleanupPlugin({
       exclude: ["README.md", "assets/**/*"],
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
     }),
   ]
 };
