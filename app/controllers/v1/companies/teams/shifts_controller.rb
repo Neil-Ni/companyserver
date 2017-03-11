@@ -4,7 +4,11 @@ class V1::Companies::Teams::ShiftsController < V1::Companies::Teams::BaseControl
   wrap_parameters Shift
 
   def index
-    render json: { shifts: shifts.map { |t| ShiftSerializer.new.(t) } }
+    render json: {
+      shifts: shifts.where('start >= ? and stop <= ?', after, before).map { |t| ShiftSerializer.new.(t) },
+      shift_start_after: after,
+      shift_start_before: before
+    }
   end
 
   def show
@@ -30,6 +34,14 @@ class V1::Companies::Teams::ShiftsController < V1::Companies::Teams::BaseControl
 
   def shifts
     team.shifts
+  end
+
+  def after
+    params[:shift_start_after]
+  end
+
+  def before
+    params[:shift_start_before]
   end
 
   def shift
