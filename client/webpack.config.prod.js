@@ -2,7 +2,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-var CompressionPlugin = require('compression-webpack-plugin');
 var hash = Date.now();
 var bundleName = "bundle-" + hash + ".js";
 

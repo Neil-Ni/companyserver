@@ -20,3 +20,14 @@ If @kadira/storybook fails to install locally, try running `npm install` in your
 To run Storybook, use this npm script:
 
 `npm run storybook` 
+
+
+## deploying to s3
+
+```
+#setup s3 bucket first
+
+cp .env.example .env
+npm run build
+cd dist && sh ./deploy.sh live
+```
