@@ -25,7 +25,7 @@ import {
 } from './constants/config';
 import i18n from './i18n';
 
-require('../third_party/node/material_design_lite/main');
+require('react-mdl/extra/material');
 require('./main.scss');
 
 const currentEnv = detectEnvironment();
