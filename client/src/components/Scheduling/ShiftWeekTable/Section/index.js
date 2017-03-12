@@ -2,7 +2,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import 'moment-timezone';
 import React, { PropTypes } from 'react';
-
 import TableSectionPhotoName from './PhotoName';
 import TableSectionJobName from './JobName';
 import SectionSummaryInfo from './SummaryInfo';
@@ -27,6 +26,7 @@ class ShiftWeekTableSection extends React.Component {
       _.extend({}, column, {
         shift: {},
         rowNumber: rowCount,
+        conflicted: false,
       })
     );
   }
@@ -54,7 +54,7 @@ class ShiftWeekTableSection extends React.Component {
         4) map shifts over by day into the rows
     */
 
-    const { columns, timezone, shifts } = this.props;
+    const { columns, timezone, shifts, viewBy } = this.props;
     const dayMap = arrayToObjectBucket(_.map(columns, 'columnId'));
     const response = [];
 
@@ -100,13 +100,37 @@ class ShiftWeekTableSection extends React.Component {
       response.push(this.newRow(i));
     });
 
+    function isConflicted(dayShifts) {
+      if (_.isEmpty(dayShifts)) return false;
+
+      const times = [];
+      _.forEach(dayShifts, (shift) => {
+        times.push({ uuid: shift.uuid, time: shift.start, startTime: shift.start });
+        times.push({ uuid: shift.uuid, time: shift.stop, startTime: shift.start });
+      });
+
+      const idsSortedByTime = _.map(_.sortBy(times, 'time'), 'uuid');
+      const idsSortedByStartTime = _.map(_.sortBy(times, 'startTime'), 'uuid');
+
+      return !_.isEqual(idsSortedByTime, idsSortedByStartTime);
+    }
 
     // now transfer into the rows
-    _.forEach(dayMap, (dayShifts, key) => {
-      _.forEach(dayShifts, (shift, index) => {
-        response[index][dateToIndex[key]].shift = shift;
+    if (viewBy === 'employee') {
+      _.forEach(dayMap, (dayShifts, key) => {
+        const conflicted = isConflicted(dayShifts);
+        _.forEach(dayShifts, (shift, index) => {
+          response[index][dateToIndex[key]].shift = shift;
+          response[index][dateToIndex[key]].conflicted = conflicted;
+        });
       });
-    });
+    } else {
+      _.forEach(dayMap, (dayShifts, key) => {
+        _.forEach(dayShifts, (shift, index) => {
+          response[index][dateToIndex[key]].shift = shift;
+        });
+      });
+    }
 
     return response;
   }

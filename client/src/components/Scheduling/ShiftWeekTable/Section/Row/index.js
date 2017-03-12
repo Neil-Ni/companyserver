@@ -58,6 +58,7 @@ function ShiftWeekTableRow({
                     <ShiftWeekTableCard
                       key={cellKey}
                       timezone={timezone}
+                      conflicted={column.conflicted}
                       shiftStart={column.shift.start}
                       shiftStop={column.shift.stop}
                       published={column.shift.published}

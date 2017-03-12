@@ -45,6 +45,12 @@
     float: right;
     color: $staffjoy-palette-logo-grey;
     font-size: 8px;
+
+    .error-button {
+      color: red;
+      font-size: 12px;
+      margin-left: 1px;
+    }
   }
 
   .shift-z-axis {

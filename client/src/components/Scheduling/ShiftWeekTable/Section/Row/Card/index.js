@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 import { ScaleModal } from 'boron';
 import { translate } from 'react-i18next';
+import { Icon } from 'react-mdl';
 import moment from 'moment';
 import 'moment-timezone';
 import classNames from 'classnames';
@@ -155,7 +156,7 @@ class ShiftWeekTableCard extends React.Component {
     const { employees, jobs, shiftStart, shiftStop, timezone, published,
       viewBy, jobUuid, userUuid, connectDragSource, connectDropTarget,
       isDragging, columnId, updateSchedulingModalFormData, modalFormData,
-      isOver, t } = this.props;
+      isOver, t, conflicted } = this.props;
     const { zAxisOpened } = this.state;
     const startMoment = moment.utc(shiftStart).tz(timezone);
     const startDisplay = startMoment.format(MOMENT_SHIFT_CARD_TIMES);
@@ -283,7 +284,10 @@ class ShiftWeekTableCard extends React.Component {
           </ModalLayoutSingleColumn>
         </ScaleModal>
         <div className="shift-details" onClick={this.showEditShiftModal}>
-          <span className="duration">{formattedDuration}</span>
+          <span className="duration">
+            {formattedDuration}
+            {conflicted ? <Icon className="error-button" name="error_outline" /> : ''}
+          </span>
           <div>
             <div className="card-label">{t('start')}</div>
             <div className="card-time">{startDisplay}</div>
@@ -368,6 +372,7 @@ ShiftWeekTableCard.propTypes = {
   updateSchedulingModalFormData: PropTypes.func.isRequired,
   clearSchedulingModalFormData: PropTypes.func.isRequired,
   editTeamShift: PropTypes.func.isRequired,
+  conflicted: PropTypes.bool.isRequired,
   published: PropTypes.bool.isRequired,
   onZAxisChange: PropTypes.func.isRequired,
   companyUuid: PropTypes.string,
