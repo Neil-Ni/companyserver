@@ -87,6 +87,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
+    "react-tooltip": "^3.2.7",
     "redux": "^3.5.2",
     "redux-form": "^6.1.1",
     "redux-logger": "^2.6.1",

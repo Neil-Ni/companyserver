@@ -5,6 +5,7 @@ import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
 import { ScaleModal } from 'boron';
 import { translate } from 'react-i18next';
 import { Icon } from 'react-mdl';
+import ReactTooltip from 'react-tooltip';
 import moment from 'moment';
 import 'moment-timezone';
 import classNames from 'classnames';
@@ -286,7 +287,18 @@ class ShiftWeekTableCard extends React.Component {
         <div className="shift-details" onClick={this.showEditShiftModal}>
           <span className="duration">
             {formattedDuration}
-            {conflicted ? <Icon className="error-button" name="error_outline" /> : ''}
+            {
+              conflicted ?
+                <span className="error-button">
+                  <Icon
+                    data-tip={t('shiftConflict')}
+                    data-type="error"
+                    effect="solid"
+                    name="error_outline"
+                  />
+                  <ReactTooltip />
+                </span> : ''
+            }
           </span>
           <div>
             <div className="card-label">{t('start')}</div>

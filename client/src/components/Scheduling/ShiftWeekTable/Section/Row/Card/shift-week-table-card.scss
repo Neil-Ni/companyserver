@@ -47,9 +47,11 @@
     font-size: 8px;
 
     .error-button {
-      color: red;
-      font-size: 12px;
-      margin-left: 1px;
+      i {
+        color: red;
+        font-size: 12px;
+        margin-left: 1px;
+      }
     }
   }
 

@@ -71,5 +71,6 @@
     "title": "Staffjoy Employees"
   },
   "contactInformation": "Contact Information",
-  "warning": "Warning"
+  "warning": "Warning",
+  "shiftConflict": "Warning! Multiple shifts assigned at the same time"
 }
