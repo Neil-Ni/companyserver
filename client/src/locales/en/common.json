@@ -72,5 +72,6 @@
   },
   "contactInformation": "Contact Information",
   "warning": "Warning",
-  "shiftConflict": "Warning! Multiple shifts assigned at the same time"
+  "shiftConflict": "Warning! Multiple shifts assigned at the same time",
+  "overScheduled": "Warning! Scheduled for more than 40 hours"
 }

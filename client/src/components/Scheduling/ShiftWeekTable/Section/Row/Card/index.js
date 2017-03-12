@@ -293,7 +293,6 @@ class ShiftWeekTableCard extends React.Component {
                   <Icon
                     data-tip={t('shiftConflict')}
                     data-type="error"
-                    effect="solid"
                     name="error_outline"
                   />
                   <ReactTooltip />

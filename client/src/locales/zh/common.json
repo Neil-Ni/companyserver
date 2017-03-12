@@ -72,5 +72,6 @@
   },
   "contactInformation": "聯絡方法",
   "warning": "警告",
-  "shiftConflict": "警告! 排班時間重複"
+  "shiftConflict": "警告! 排班時間重複",
+  "overScheduled": "警告! 超過40小時限制"
 }

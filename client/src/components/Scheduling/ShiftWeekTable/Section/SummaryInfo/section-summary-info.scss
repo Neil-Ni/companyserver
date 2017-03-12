@@ -6,4 +6,14 @@
   text-transform: uppercase;
   font-weight: 600;
   color: $medium-grey;
+
+  .error-button {
+    i {
+      color: red;
+      font-size: 12px;
+      margin-left: 3px;
+      position: relative;
+      top: -2px;
+    }
+  }
 }

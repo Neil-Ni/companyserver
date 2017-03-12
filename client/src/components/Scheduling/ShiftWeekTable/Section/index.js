@@ -179,7 +179,7 @@ class ShiftWeekTableSection extends React.Component {
       <div className="shift-week-table-section">
         <div className="section-info">
           {nameSection}
-          <SectionSummaryInfo shifts={shifts} timezone={timezone} />
+          <SectionSummaryInfo shifts={shifts} timezone={timezone} viewBy={viewBy} />
         </div>
         <div className="shift-rows">
           {
