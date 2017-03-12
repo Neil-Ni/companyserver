@@ -70,6 +70,9 @@ module.exports = {
     configFile: "./.eslintrc"
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     new HtmlWebpackPlugin({
       template: "index.template.ejs",
       inject: "body",
