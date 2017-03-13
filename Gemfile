@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '4.1.0'
 gem 'factory_girl_rails', '4.7.0'
 gem 'faker', '1.6.3'
+gem 'bulk_insert', '1.4.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'

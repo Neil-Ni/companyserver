@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :jobs, only: [:index, :show, :update, :create]
         resources :shifts, only: [:index, :show, :update, :create, :destroy]
         resources :workers, only: [:index, :show, :create]
+        resources :duplicate_shifts, only: :create
       end
     end
   end

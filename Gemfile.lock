@@ -51,6 +51,8 @@ GEM
     arel (7.1.4)
     bcrypt (3.1.11)
     builder (3.2.3)
+    bulk_insert (1.4.0)
+      activerecord (>= 4.1.0)
     byebug (9.0.6)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -229,6 +231,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bulk_insert (= 1.4.0)
   byebug
   coffee-rails (~> 4.2)
   devise (= 4.1.0)
