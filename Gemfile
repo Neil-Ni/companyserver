@@ -14,6 +14,7 @@ gem 'devise', '4.1.0'
 gem 'factory_girl_rails', '4.7.0'
 gem 'faker', '1.6.3'
 gem 'bulk_insert', '1.4.0'
+gem 'rack-cors', '0.4.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
@@ -25,7 +26,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rack-cors', '0.4.0'
   gem 'guard-rspec',  github: 'guard/guard-rspec', branch: 'rails-5-support'
 end
 
