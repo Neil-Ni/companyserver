@@ -73,5 +73,7 @@
   "contactInformation": "Contact Information",
   "warning": "Warning",
   "shiftConflict": "Warning! Multiple shifts assigned at the same time",
-  "overScheduled": "Warning! Scheduled for more than 40 hours"
+  "overScheduled": "Warning! Scheduled for more than 40 hours",
+  "weekEmpty": "Hi! Looks like your week is empty so far. You can: ",
+  "copyLastWeek": "Copy all shifts from last week"
 }

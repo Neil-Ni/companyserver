@@ -73,5 +73,7 @@
   "contactInformation": "聯絡方法",
   "warning": "警告",
   "shiftConflict": "警告! 排班時間重複",
-  "overScheduled": "警告! 超過40小時限制"
+  "overScheduled": "警告! 超過40小時限制",
+  "weekEmpty": "Hi! 這星期的班還是空白的, 你可以: ",
+  "copyLastWeek": "複製上星期所有的班"
 }

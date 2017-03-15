@@ -6,7 +6,9 @@ import { DragDropContext as dragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import $ from 'npm-zepto';
 import * as actions from 'actions';
+import { copyLastWeekShifts } from 'actions/teams/shifts';
 import LoadingScreen from 'components/LoadingScreen';
+import StaffjoyButton from 'components/StaffjoyButton';
 import ShiftWeekTable from './ShiftWeekTable';
 import SchedulingDateController from './DateController';
 import SchedulingViewByController from './ViewByController';
@@ -42,7 +44,7 @@ class Scheduling extends React.Component {
       deleteTeamShift, toggleSchedulingModal, modalOpen, editTeamShift,
       updateSchedulingModalFormData, createTeamShift, modalFormData,
       clearSchedulingModalFormData, isSaving, companyUuid,
-      teamUuid, t } = this.props;
+      teamUuid, t, duplicateShifts } = this.props;
     const tableSize = 7;
     const viewBy = filters.viewBy;
     const startDate = params.startDate;
@@ -52,8 +54,6 @@ class Scheduling extends React.Component {
         <LoadingScreen />
       );
     }
-
-    // TODO - add publish button into top controls
 
     return (
       <div className="scheduling-container">
@@ -78,6 +78,19 @@ class Scheduling extends React.Component {
             />
           </li>
         </ul>
+        { _.isEmpty(shifts) &&
+          <ul className="custom-controls">
+            <li className="control-unit">
+              {t('weekEmpty')}
+              <StaffjoyButton
+                onClick={() => { duplicateShifts(params); }}
+                buttonType="outline"
+              >
+                {t('copyLastWeek')}
+              </StaffjoyButton>
+            </li>
+          </ul>
+        }
         {(() =>
           // TODO when we have more views, determine which view type to use
           // if (props.params.viewType === 'week') {
@@ -136,6 +149,7 @@ Scheduling.propTypes = {
   clearSchedulingModalFormData: PropTypes.func.isRequired,
   handleCardZAxisChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  duplicateShifts: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -203,6 +217,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const { teamUuid } = ownProps.routeParams;
 
     dispatch(actions.changeViewBy(newView, teamUuid));
+  },
+  duplicateShifts: (params) => {
+    const { companyUuid, teamUuid } = ownProps.routeParams;
+    const { start, stop } = params.range;
+
+    dispatch(copyLastWeekShifts(companyUuid, teamUuid, { start, stop }));
   },
   stepDateRange: (event) => {
     const { companyUuid, teamUuid } = ownProps.routeParams;

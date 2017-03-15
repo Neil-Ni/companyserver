@@ -5,12 +5,10 @@ class V1::Companies::Teams::DuplicateShiftsController < V1::Companies::Teams::Ba
 
   def create
     create_new_shifts!
-    new_shift_start_after = DateTime.strptime(after) + 1.week
-    new_shift_start_before = DateTime.strptime(before) + 1.week
     render json: {
-      shifts: team.shifts.where('start >= ? and stop <= ?', new_shift_start_after, new_shift_start_before),
-      shift_start_after: new_shift_start_after,
-      new_shift_start_before: new_shift_start_before,
+      shifts: team.shifts.where('start >= ? and stop <= ?', after, before).map { |t| ShiftSerializer.new.(t) },
+      shift_start_after: after,
+      shift_start_before: before,
     }
   end
 
@@ -32,28 +30,32 @@ class V1::Companies::Teams::DuplicateShiftsController < V1::Companies::Teams::Ba
   end
 
   def current_shifts
-    team.shifts.where('start >= ? and stop <= ?', after, before)
+    team.shifts.where(
+      'start >= ? and stop <= ?',
+      DateTime.strptime(after, '%Y-%m-%dT%H:%M:%S') - 1.week,
+      DateTime.strptime(before, '%Y-%m-%dT%H:%M:%S') - 1.week
+    )
   end
 
   def after
-    params[:shift_start_after]
+    params[:start]
   end
 
   def before
-    params[:shift_start_before]
+    params[:stop]
   end
 
   def pre_process_params
     params[:shift].tap do |s|
-      s[:shift_start_after] = params[:shift_start_after] if params.key?(:shift_start_after)
-      s[:shift_start_before]  = params[:shift_start_before] if params.key?(:shift_start_before)
+      s[:start] = params[:start] if params.key?(:start)
+      s[:stop]  = params[:stop] if params.key?(:stop)
     end
   end
 
   def create_params
     params.require(:shift).permit(
-      :shift_start_after,
-      :shift_start_before
+      :start,
+      :stop
     ).to_h
   end
 end

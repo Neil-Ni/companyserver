@@ -18,6 +18,22 @@
   background-color: $staffjoy-palette-white;
   z-index: 1;
 
+  .custom-controls {
+    height: 8%;
+    min-height: 40px;
+    max-height: 50px;
+    width: 100%;
+    margin: 0;
+    padding-left: 20px;
+    z-index: 1;
+
+    .control-unit {
+      display: inline-block;
+      vertical-align: top;
+      margin: 13px 1% 1% 15%;
+    }
+  }
+
   .scheduling-controls {
     height: 8%;
     min-height: 60px;

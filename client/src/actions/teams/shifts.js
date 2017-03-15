@@ -272,3 +272,31 @@ export function deleteTeamShift(companyUuid, teamUuid, shiftUuid) {
       );
   };
 }
+
+export function copyLastWeekShifts(companyUuid, teamUuid, params) {
+  return (dispatch) => {
+    dispatch(requestTeamShifts(teamUuid, params));
+
+    const shiftPath =
+      `/v1/companies/${companyUuid}/teams/${teamUuid}/duplicate_shifts`;
+
+    return fetch(
+      routeToMicroservice('company', shiftPath),
+      {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(params),
+      })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then((data) => {
+        const normalized = normalize(_.get(data, 'shifts', []), arrayOfShifts);
+
+        return dispatch(receiveTeamShifts(teamUuid, {
+          data: normalized.entities.shifts,
+          order: normalized.result,
+          lastUpdate: Date.now(),
+        }));
+      });
+  };
+}
