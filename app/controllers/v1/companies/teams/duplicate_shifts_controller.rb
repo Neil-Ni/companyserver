@@ -4,15 +4,21 @@ class V1::Companies::Teams::DuplicateShiftsController < V1::Companies::Teams::Ba
   wrap_parameters Shift
 
   def create
+    validate_time_range
     create_new_shifts!
     render json: {
-      shifts: team.shifts.where('start >= ? and stop <= ?', after, before).map { |t| ShiftSerializer.new.(t) },
+      shifts: team_shifts.where('start >= ? and stop <= ?', after, before).map { |t| ShiftSerializer.new.(t) },
       shift_start_after: after,
       shift_start_before: before,
     }
   end
 
   private
+
+  def validate_time_range
+    return unless team_shifts.where('start >= ? and stop <= ?', after, before).any?
+    raise ::Exceptions::UnprocessableEntity, 'Shifts exist in the specified range'
+  end
 
   def create_new_shifts!
     Shift.bulk_insert do |worker|
@@ -30,11 +36,15 @@ class V1::Companies::Teams::DuplicateShiftsController < V1::Companies::Teams::Ba
   end
 
   def current_shifts
-    team.shifts.where(
+    team_shifts.where(
       'start >= ? and stop <= ?',
       DateTime.strptime(after, '%Y-%m-%dT%H:%M:%S') - 1.week,
       DateTime.strptime(before, '%Y-%m-%dT%H:%M:%S') - 1.week
     )
+  end
+
+  def team_shifts
+    @team_shifts ||= team.shifts
   end
 
   def after
